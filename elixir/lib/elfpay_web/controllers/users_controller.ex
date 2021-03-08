@@ -5,9 +5,9 @@ defmodule ElfpayWeb.UsersController do
   
   def create(conn, params) do
     with {:ok, %User{} = user} <- Elfpay.create_user(params) do
-    conn
-    |> put_status(:created)
-    |> render("create.json", user: user)
+      conn
+      |> put_status(:created)
+      |> render("create.json", user: user)
     end
   end
 end

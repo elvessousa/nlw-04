@@ -2,6 +2,7 @@ defmodule Elfpay.User do
   use Ecto.Schema
   import Ecto.Changeset
   
+  alias Elfpay.Account
   alias Ecto.Changeset
 
   # Binary_id: UUID
@@ -15,6 +16,7 @@ defmodule Elfpay.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     field :nickname, :string
+    has_one :account, Account
 
     timestamps()
   end
