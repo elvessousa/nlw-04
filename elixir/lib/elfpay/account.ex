@@ -3,7 +3,6 @@ defmodule Elfpay.Account do
   use Ecto.Schema
   import Ecto.Changeset
   
-  alias Ecto.Changeset
   alias Elfpay.User
 
   # Binary_id: UUID
