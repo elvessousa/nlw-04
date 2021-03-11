@@ -1,8 +1,14 @@
 defmodule ElfpayWeb.Router do
   use ElfpayWeb, :router
 
+  import Plug.BasicAuth
+
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  pipeline :auth do
+    plug :basic_auth, Application.compile_env(:elfpay, :basic_auth)
   end
 
   scope "/api", ElfpayWeb do
@@ -10,10 +16,15 @@ defmodule ElfpayWeb.Router do
     
     get "/:filename", WelcomeController, :index
     post "/users", UsersController, :create
-    post "/accounts/:id/deposit", AccountsController, :deposit
-    post "/accounts/:id/withdraw", AccountsController, :withdraw
   end
 
+  scope "/api", ElfpayWeb do
+    pipe_through [:api, :auth]
+    
+    post "/accounts/:id/deposit", AccountsController, :deposit
+    post "/accounts/:id/withdraw", AccountsController, :withdraw
+    post "/accounts/transaction", AccountsController, :transaction
+  end
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put

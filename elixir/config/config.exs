@@ -22,6 +22,11 @@ config :elfpay, Elfpay.Repo,
   migration_primary_key: [type: :binary_id],
   migration_foreign_key: [type: :binary_id]
 
+# Basic Authorization test
+# config :elfpay, :basic_auth,
+#  username: "user",
+#  password: "password"
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
